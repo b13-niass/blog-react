@@ -28,14 +28,16 @@ const Home = () => {
     const [name, setName] = useState("mario")
 
     useEffect(() => {
-        fetch('http://localhost:8084/blogs')
-            .then(res => {
-                return res.json();
-            })
-            .then(data =>{
-                setBlogs(data);
-                setIsPending(false)
-            })
+        setTimeout( () => {
+            fetch('http://localhost:8084/blogs')
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    setBlogs(data);
+                    setIsPending(false)
+                })
+        }, 1000)
     }, [name]);
 
     return (
@@ -46,7 +48,7 @@ const Home = () => {
 
         {/*<BlogList blogs={blogs.filter(blog => blog.author==="mario")} title="Marios Blogs !" handleDelete={handleDelete}/>*/}
         {/*  <button onClick={() => setName(prevState => (prevState === "Dieng" ? "Niass" : "Dieng"))}>Change name</button>*/}
-          <p>{name}</p>
+        {/*  <p>{name}</p>*/}
       </div>
     );
 }
