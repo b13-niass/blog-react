@@ -1,15 +1,20 @@
 import {useState} from "react";
-import useFetch from "./useFetch";
+// import useFetch from "./useFetch";
+import {useNavigate} from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
+    const [isPending, setIsPending] = useState(false);
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // let data = new FormData(e.target)
         // console.log(data.get('title'));
         const blog = { title, body, author};
+        setIsPending(true);
         // const {data: blog1, isPending, error} = useFetch("http://localhost:8084/blogs");
         fetch("http://localhost:8084/blogs",{
             method: "POST",
@@ -25,6 +30,9 @@ const Create = () => {
             setTitle('');
             setBody('');
             setAuthor('');
+            setIsPending(false)
+            // navigate(-1);
+            // navigate('/');
         })
     }
     return (
@@ -42,7 +50,8 @@ const Create = () => {
                     <option value="mario">mario</option>
                     <option value="yoshi">yoshi</option>
                 </select>
-                <button type="submit">Add Blog</button>
+                {!isPending && <button type="submit">Add Blog</button>}
+                {isPending && <button disabled type="submit">Adding Blog....</button>}
             </form>
         </div>
     )
