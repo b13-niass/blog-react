@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "My First Blog",
+      "author": "John Doe",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel neque vel metus semper facilisis. Nullam in nisi et felis consectetur tincidunt. Donec non iaculis enim, id pharetra urna."
+    },
+    {
+      "id": 2,
+      "title": "Another Blog",
+      "author": "Jane Smith",
+      "body": "Proin non ex et turpis tristique fringilla. Duis vel neque vel metus semper facilisis. Nullam in nisi et felis consectetur tincidunt. Donec non iaculis enim, id pharetra urna."
+    },
+    {
+      "id": 3,
+      "title": "Last Blog",
+      "author": "Alice Johnson",
+      "body": "Cras euismod dui non nunc congue, vel elementum felis tempor. Duis vel neque vel metus semper facilisis. Nullam in nisi et felis consectetur tincidunt. Donec non iaculis enim, id pharetra urna."
+    }
+  ]
+}
