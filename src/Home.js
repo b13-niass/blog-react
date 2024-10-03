@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 const Home = () => {
     // let name = "Home";
   //   const [name, setName] = useState("Dieng");
@@ -22,33 +23,9 @@ const Home = () => {
     //     setBlogs(blogs.filter(blog => blog.id!== id));
     // }
 
-    const [blogs, setBlogs] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-
     const [name, setName] = useState("mario")
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        setTimeout( () => {
-            fetch('http://localhost:8084/blogs')
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`Mon HTTP error! status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    setBlogs(data);
-                    setIsPending(false)
-                    setError(null);
-                }).catch(err => {
-                    // console.error('Error fetching data', error);
-                setIsPending(false);
-                setError(err.message);
-            })
-        }, 1000)
-    }, [name]);
-
+    const {data: blogs, isPending, error} = useFetch("http://localhost:8084/blogs");
     return (
       <div className="home">
           {error && <div>{error}</div>}
@@ -56,9 +33,9 @@ const Home = () => {
           { blogs && <BlogList blogs={blogs} title="All Blogs !" />}
           {/*{ blogs && <BlogList blogs={blogs} title="All Blogs !" handleDelete={handleDelete}/>}*/}
 
-        {/*<BlogList blogs={blogs.filter(blog => blog.author==="mario")} title="Marios Blogs !" handleDelete={handleDelete}/>*/}
-        {/*  <button onClick={() => setName(prevState => (prevState === "Dieng" ? "Niass" : "Dieng"))}>Change name</button>*/}
-        {/*  <p>{name}</p>*/}
+          {/*<BlogList blogs={blogs.filter(blog => blog.author==="mario")} title="Marios Blogs !" handleDelete={handleDelete}/>*/}
+          {/*  <button onClick={() => setName(prevState => (prevState === "Dieng" ? "Niass" : "Dieng"))}>Change name</button>*/}
+          {/*  <p>{name}</p>*/}
       </div>
     );
 }
