@@ -26,22 +26,32 @@ const Home = () => {
     const [isPending, setIsPending] = useState(true);
 
     const [name, setName] = useState("mario")
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setTimeout( () => {
             fetch('http://localhost:8084/blogs')
                 .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`Mon HTTP error! status: ${res.status}`);
+                    }
                     return res.json();
                 })
                 .then(data => {
                     setBlogs(data);
                     setIsPending(false)
-                })
+                    setError(null);
+                }).catch(err => {
+                    // console.error('Error fetching data', error);
+                setIsPending(false);
+                setError(err.message);
+            })
         }, 1000)
     }, [name]);
 
     return (
       <div className="home">
+          {error && <div>{error}</div>}
           {isPending && <div> Loading .... </div>}
           { blogs && <BlogList blogs={blogs} title="All Blogs !" />}
           {/*{ blogs && <BlogList blogs={blogs} title="All Blogs !" handleDelete={handleDelete}/>}*/}
