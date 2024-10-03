@@ -1,13 +1,14 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
-import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Create from "./Create";
+import BlogDetails from "./BlogDetails";
 
 function App() {
-    const title = "Welcome to the new blog"
-    const likes = 50;
-    const person = {name: "John", age: 30};
-    const myArray = ["John", "John"];
+    // const title = "Welcome to the new blog"
+    // const likes = 50;
+    // const person = {name: "John", age: 30};
+    // const myArray = ["John", "John"];
   return (
       <Router>
           <div className="App">
@@ -16,6 +17,7 @@ function App() {
                   <Routes>
                       <Route path="/" element={<Home/>} />
                       <Route path="/create" element={<Create/>} />
+                       <Route path="/blogs/:id" element={<BlogDetails/>} />
                   </Routes>
               </div>
           </div>
